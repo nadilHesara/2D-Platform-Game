@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+    public int fruitsCollected;
+
     public void Awake()
     {
         if(instance == null) 
@@ -16,5 +18,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    
+
+    public void AddFruit() => fruitsCollected++;
+
 }
