@@ -50,8 +50,12 @@ public class Player : MonoBehaviour
 
     private int facingDir = 1;
 
-    
-    
+
+    [Header("VFX")]
+    [SerializeField] private GameObject deathVFX;
+
+
+
 
     private void Awake()
     {
@@ -102,9 +106,15 @@ public class Player : MonoBehaviour
         isKnocked = false;
     }
 
+    public void Die() 
+    { 
+        Destroy(gameObject);
+        GameObject newDeathVfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
+    } 
+
 
     private void UpdateAirborneStatus()
-    {
+    { 
         if (isAirborne && isGrounded)
         {
             HandleLanding();
