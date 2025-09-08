@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint; 
+
     public void RespawnPlayer() => StartCoroutine(RespawnCoroutine());
 
 
