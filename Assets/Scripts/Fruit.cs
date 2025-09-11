@@ -37,7 +37,7 @@ public class Fruit : MonoBehaviour
 
     private void SetRandomLookIfNeeded()
     {
-        if(gameManager.fruitsHaveRandomLook == false) {
+        if(gameManager.fruitsAreRandom == false) {
             UpdateFruitVisuals();
             return;
 
