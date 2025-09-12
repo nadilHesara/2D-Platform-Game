@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
         if (isKnocked) return;
 
         StartCoroutine(KnockbackRoutine()); 
-        anim.SetTrigger("knockback");
+        
 
         rb.velocity = new Vector2(knockbackPower.x * -facingDir, knockbackPower.y);
     }
@@ -132,11 +132,14 @@ public class Player : MonoBehaviour
     {
 
         isKnocked = true;
+        anim.SetBool("isKnocked", true);
 
         yield return new WaitForSeconds(knockbackDuration);
 
 
         isKnocked = false;
+
+        anim.SetBool("isKnocked", false);
     }
 
     public void Die() 
