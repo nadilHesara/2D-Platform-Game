@@ -13645,14 +13645,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2137492415783994296, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 2137492415783994296, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.89
-      objectReference: {fileID: 0}
     - target: {fileID: 6114234591896794173, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.04
@@ -13696,22 +13688,6 @@ PrefabInstance:
     - target: {fileID: 6722108389007485506, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
       propertyPath: m_Name
       value: Trap_Saw (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7325487625741270868, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7325487625741270868, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 8720380847828857365, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8720380847828857365, guid: 82ccc58626219d74cb50bf0482152d06, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

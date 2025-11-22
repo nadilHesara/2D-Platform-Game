@@ -32,6 +32,17 @@ public class Trap_Saw : MonoBehaviour
 
     private void UpdateWaypointInfo()
     {
+        List<Trap_SawWaypoint> wayPointList = new List<Trap_SawWaypoint>(GetComponentsInChildren<Trap_SawWaypoint>());
+
+        if(wayPointList.Count != waypoint.Length)
+        {
+            waypoint = new Transform[wayPointList.Count];
+            for (int i = 0; i < wayPointList.Count; i++)
+            {
+                waypoint[i] = wayPointList[i].transform;
+            }
+        }
+
         waypointPosition = new Vector3[waypoint.Length];
 
         for (int i = 0; i < waypoint.Length; i++)
