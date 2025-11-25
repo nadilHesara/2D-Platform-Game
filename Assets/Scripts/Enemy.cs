@@ -8,9 +8,17 @@ public class Enemy : MonoBehaviour
     protected Animator anim;
     protected Rigidbody2D rb;
 
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float idleDuration;
+    [SerializeField] protected GameObject damageTrigger;
+    [Space]
+    [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] protected float idleDuration = 1.5f;
     protected float idleTimer;
+
+    [Header("Death details")]
+    [SerializeField] private float deathImpactSpeed = 5;
+    [SerializeField] private float deathRotationSpeed = 150;
+    private int deathRotationDirection = 1;
+    protected bool isDead;
 
 
     [Header("Basic Collision")]
@@ -35,7 +43,30 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
         idleTimer -= Time.deltaTime;
+
+        if (isDead)
+            HandleDeathRotation();
     }
+
+
+    public virtual void Die()
+    {
+        damageTrigger.SetActive(false);
+        anim.SetTrigger("hit");
+        rb.velocity = new Vector2(rb.velocity.x, deathImpactSpeed);
+        isDead = true;
+
+        if(Random.Range(0,100) < 50)
+            deathRotationDirection = deathRotationDirection* -1;
+
+    }
+
+
+    private void HandleDeathRotation()
+    {
+        transform.Rotate(0, 0, (deathRotationSpeed * deathRotationDirection) * Time.deltaTime);
+    }
+
     protected virtual void HandleFlip(float xValue)
     {
         if (xValue < 0 && facingRight || xValue > 0 && !facingRight)

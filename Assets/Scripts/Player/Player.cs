@@ -41,6 +41,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
+    [Space]
+    [SerializeField] private Transform enemyCheck;
+    [SerializeField] private float enemyCheckRadius;
+    [SerializeField] private LayerMask whatIsEnemy;
     private bool isGrounded;
     private bool isAirborne;
     private bool isWallDetected;
@@ -95,6 +99,7 @@ public class Player : MonoBehaviour
 
         if (isKnocked) return;
 
+        HandleEnemyDetection();
         HandleInput();
         HandleWallSlide();
         HandleMovement();
@@ -103,7 +108,24 @@ public class Player : MonoBehaviour
         HandleAnimations();
     }
 
+    private void HandleEnemyDetection()
+    {
+        if(rb.velocity.y >= 0) return;
 
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyCheck.position, enemyCheckRadius, whatIsEnemy);
+
+        foreach(var enemy in colliders)
+        {
+            Enemy newEnemy = enemy.GetComponent<Enemy>();
+
+            if(enemy != null)
+            {
+                newEnemy.Die();
+                Jump();
+            }
+        
+        }
+    }
 
     public void RespawnFinished(bool finish)
     {
@@ -357,6 +379,7 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(enemyCheck.position, enemyCheckRadius);
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y-groundCheckDistance));
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y));
     }
