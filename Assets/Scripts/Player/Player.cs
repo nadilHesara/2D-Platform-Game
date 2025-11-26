@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
         foreach(var enemy in colliders)
         {
-            Enemy newEnemy = enemy.GetComponent<Enemy>();
+            Enemy newEnemy = enemy.GetComponentInParent<Enemy>();
 
             if(enemy != null)
             {
