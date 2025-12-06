@@ -5,6 +5,7 @@ using UnityEngine.Windows;
 
 public class Enemy : MonoBehaviour
 {
+    private SpriteRenderer sr=> GetComponent<SpriteRenderer>();
     protected Transform player;
     protected Animator anim;
     protected Rigidbody2D rb;
@@ -49,6 +50,12 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         InvokeRepeating(nameof(UpdatePlayerRef), 0, 1);  
+
+        if(sr.flipX==true && !facingRight)
+        {
+            sr.flipX = false;
+            Flip();
+        }
     }
 
     private void UpdatePlayerRef()
@@ -108,6 +115,11 @@ public class Enemy : MonoBehaviour
 
     }
 
+    [ContextMenu("Change Facing Direction")]
+    public void FlipDefaultFacingDirection()
+    {
+        sr.flipX = !sr.flipX;
+    }
 
     protected virtual void HandleAnimator()
     {
