@@ -238,7 +238,7 @@ MonoBehaviour:
   wallJumpDuration: 0.6
   wallJumpForce: {x: 7, y: 14}
   knockbackDuration: 0.6
-  knockbackPower: {x: 5, y: 7}
+  knockbackPower: {x: 7, y: 7}
   groundCheckDistance: 0.8
   wallCheckDistance: 0.6
   whatIsGround:

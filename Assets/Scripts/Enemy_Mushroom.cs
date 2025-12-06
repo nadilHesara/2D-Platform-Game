@@ -10,12 +10,9 @@ public class Enemy_Mushroom : Enemy
     {
         base.Update();
 
-        anim.SetFloat("xVelocity", rb.velocity.x);
-
         if(isDead)
             return;
 
-        HandleCollision();
         HandleMovement();
 
         if(isGrounded)
