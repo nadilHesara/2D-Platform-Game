@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
     protected bool canMove = true;
 
     [Header("Death details")]
-    [SerializeField] private float deathImpactSpeed = 5;
-    [SerializeField] private float deathRotationSpeed = 150;
+    [SerializeField] protected float deathImpactSpeed = 5;
+    [SerializeField] protected float deathRotationSpeed = 150;
     protected int deathRotationDirection = 1;
     protected bool isDead;
 

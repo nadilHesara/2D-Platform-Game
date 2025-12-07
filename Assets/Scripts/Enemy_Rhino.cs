@@ -16,7 +16,7 @@ public class Enemy_Rhino : Enemy
     protected override void Start()
     {
         base.Start();
-
+        canMove = false;
         defaultSpeed = moveSpeed;
     }
     protected override void Update()

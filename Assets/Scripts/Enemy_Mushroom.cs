@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Enemy_Mushroom : Enemy
 {
-
-
     protected override void Update()
     {
         base.Update();
@@ -40,7 +38,5 @@ public class Enemy_Mushroom : Enemy
         if(isGroundInfrontDetected)
             rb.velocity = new Vector2(moveSpeed*facingDir, rb.velocity.y);
     }
-
-  
 
 }
