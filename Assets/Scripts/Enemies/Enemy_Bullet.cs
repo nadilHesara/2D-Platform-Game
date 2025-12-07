@@ -17,7 +17,7 @@ public class Enemy_Bullet : MonoBehaviour
 
     public void FlipSprite()=> sr.flipX = !sr.flipX;
 
-    public void SetVelocity(Vector2 velocity) => rb.velocity = velocity;
+    public void SetVelocity(Vector2 velocity) => rb.linearVelocity = velocity;
 
 
     private void OnTriggerEnter2D(Collider2D collision)

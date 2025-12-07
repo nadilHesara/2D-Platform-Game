@@ -120,7 +120,7 @@ public class Tra : MonoBehaviour
 
         rb.isKinematic = false;
         rb.gravityScale = 3.5f;
-        rb.drag = .5f;
+        rb.linearDamping = .5f;
 
 
         foreach(BoxCollider2D collider in colliders)
