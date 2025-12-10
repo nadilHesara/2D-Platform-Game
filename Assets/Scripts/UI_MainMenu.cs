@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class UI_MainMenu : MonoBehaviour
 {
     private UI_FadeEffect fadeEffect;
-    public string sceneName;
+    public string firstLevelName;
 
     [SerializeField] private GameObject[] uiElements;
 
@@ -34,5 +34,5 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(1, 1.5f, LoadLevelScene);
     }
 
-    private void LoadLevelScene()=> SceneManager.LoadScene(sceneName);
+    private void LoadLevelScene()=> SceneManager.LoadScene(firstLevelName);
 }
