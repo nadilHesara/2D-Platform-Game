@@ -58,8 +58,10 @@ public class Player : MonoBehaviour
     private int facingDir = 1;
 
 
-    [Header("VFX")]
+    [Header("Player Visuals")]
+    [SerializeField] private AnimatorOverrideController[] animators;
     [SerializeField] private GameObject deathVFX;
+    [SerializeField] private int skinId;
 
 
 
@@ -80,6 +82,8 @@ public class Player : MonoBehaviour
     {
         defaultGravityScale = rb.gravityScale;
         RespawnFinished(false);
+        UpdateSkin();
+        
     }
 
 
@@ -106,6 +110,16 @@ public class Player : MonoBehaviour
         HandleFlip();
         HandleCollisions();
         HandleAnimations();
+    }
+
+    public void UpdateSkin()
+    {
+        SkinManager skinManager = SkinManager.instance;
+
+        if(skinManager == null)
+            return;
+
+        anim.runtimeAnimatorController = animators[skinManager.chosenSkinId];
     }
 
     private void HandleEnemyDetection()
