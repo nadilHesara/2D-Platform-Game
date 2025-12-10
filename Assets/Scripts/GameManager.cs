@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void CollectFruitsInfo()
     {
-        Fruit[] allFruits = FindObjectsOfType<Fruit>();
+        Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
         totalFruits = allFruits.Length;
     }
 
@@ -71,4 +73,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         GameObject newObject = Instantiate(prefab, newPosition, Quaternion.identity);
     }
+
+    public void LoadTheEndScene() => SceneManager.LoadScene("TheEnd");
 }
