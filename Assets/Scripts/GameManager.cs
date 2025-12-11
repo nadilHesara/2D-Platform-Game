@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private UI_InGame inGameUi;
+    
     [Header("Level Management")]
+    [SerializeField] private float levelTimer; 
     [SerializeField] private int currentLevelIndex;
     private int nextLevelIndex;
 
@@ -42,15 +45,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        inGameUi = UI_InGame.instance;
+        
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
         CollectFruitsInfo();
+
     }
 
+    private void Update()
+    {
+        levelTimer += Time.deltaTime;
+        inGameUi.UpdateTimerUI(levelTimer);
+    }
     private void CollectFruitsInfo()
     {
         Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
         totalFruits = allFruits.Length;
+
+        inGameUi.UpdateFruitUI(fruitsCollected, totalFruits);
     }
 
     public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint; 
@@ -66,7 +79,12 @@ public class GameManager : MonoBehaviour
  
     }
 
-    public void AddFruit() => fruitsCollected++;
+    public void AddFruit() 
+    {
+        fruitsCollected++;
+        inGameUi.UpdateFruitUI(fruitsCollected, totalFruits);
+
+    }
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
 
