@@ -118,15 +118,13 @@ public class Tra : MonoBehaviour
 
         canMove = false;
 
-        rb.isKinematic = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 3.5f;
         rb.linearDamping = .5f;
-
 
         foreach(BoxCollider2D collider in colliders)
         {
             collider.enabled = false;
         }
-
-     }
+    }
 }

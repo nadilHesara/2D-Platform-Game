@@ -14009,7 +14009,7 @@ MonoBehaviour:
   respawnDelay: 1.5
   player: {fileID: 300109801}
   fruitsAreRandom: 0
-  fruitsCollected: 56
+  fruitsCollected: 0
   totalFruits: 0
   canReactivate: 0
   arrowPrefab: {fileID: 3518464661119179452, guid: d3268394cb497424b9652f977c98c886, type: 3}
