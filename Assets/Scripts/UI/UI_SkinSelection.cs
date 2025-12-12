@@ -1,42 +1,123 @@
+using TMPro;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+[System.Serializable]
+public struct Skin
 {
-    [SerializeField] private int currentIndex;
+    public string skinName;
+    public int skinPrice;
+    public bool unlocked;
+}
+public class UI_SkinSelection : MonoBehaviour
+{
+    [SerializeField] private Skin[] skinList;
+
+    [Header("UI details")]
+    [SerializeField] private int skinIndex;
     [SerializeField] private int maxIndex;
     [SerializeField] private Animator skinDisplay;
 
+    [SerializeField] private TextMeshProUGUI buySelectText;
+    [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField] private TextMeshProUGUI bankText;
 
+
+    private void Start()
+    {
+        LoadSkinUnlocked();
+        UpdateSkinDisplay();
+    }
+
+    private void LoadSkinUnlocked()
+    {
+        for(int i = 0; i < skinList.Length; i++)
+        {
+            string skinName = skinList[i].skinName;
+            bool skinUnlocked = PlayerPrefs.GetInt(skinName + "Unlocked", 0)==1;
+
+            if (skinUnlocked || i==0)
+                skinList[i].unlocked = true;
+        }
+    }
     public void SelectSkin()
     {
-        SkinManager.instance.SetSkinId(currentIndex);
+        if (skinList[skinIndex].unlocked == false)
+            BuySkin(skinIndex);
+        else
+            SkinManager.instance.SetSkinId(skinIndex);
+
+        UpdateSkinDisplay();
     }
     public void NextSkin()
     {
-        currentIndex++;
+        skinIndex++;
 
-        if(currentIndex > maxIndex)
-            currentIndex = 0;
+        if(skinIndex > maxIndex)
+            skinIndex = 0;
 
         UpdateSkinDisplay();
     }
 
     public void PreviousSkin()
     {
-        currentIndex--;
+        skinIndex--;
 
-        if(currentIndex < 0)
-            currentIndex = maxIndex;
+        if(skinIndex < 0)
+            skinIndex = maxIndex;
 
         UpdateSkinDisplay();
     }
 
     private void UpdateSkinDisplay()
     {
+        bankText.text = "Bank: "+FruitsInBank();
+
         for (int i = 0; i <= skinDisplay.layerCount; i++)
         {
             skinDisplay.SetLayerWeight(i, 0);
         }
-        skinDisplay.SetLayerWeight(currentIndex, 1);
+        skinDisplay.SetLayerWeight(skinIndex, 1);
+
+        if (skinList[skinIndex].unlocked)
+        {
+            priceText.transform.parent.gameObject.SetActive(false);
+            buySelectText.text = "Select";
+        }
+        else
+        {
+            priceText.transform.parent.gameObject.SetActive(true);
+            priceText.text = "Price: "+skinList[skinIndex].skinPrice;
+            buySelectText.text = "Buy";
+
+        }
+    }
+
+    private void BuySkin(int skinIndex)
+    {
+        if (HasEnoughFruits(skinList[skinIndex].skinPrice) == false)
+        {
+            Debug.Log("Not enough fruits!!!");
+            return;
+        }
+
+
+        string skinName = skinList[skinIndex].skinName;
+        skinList[skinIndex].unlocked = true;
+
+        PlayerPrefs.SetInt(skinName + "Unlocked", 1);
+    }
+
+    private int FruitsInBank() => PlayerPrefs.GetInt("TotalFruitsAmount");
+
+
+    private bool HasEnoughFruits(int price)
+    {
+        if (FruitsInBank() >= price) 
+        {
+            PlayerPrefs.SetInt("TotalFruitsAmount", FruitsInBank() - price);
+            return true;
+        }
+
+        return false;
     }
 }
