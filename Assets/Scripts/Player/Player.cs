@@ -210,6 +210,7 @@ public class Player : MonoBehaviour
 
         if (isKnocked) return;
 
+        CameraManager.instance.ScreenShake(knockbackDir);
         StartCoroutine(KnockbackRoutine()); 
         
 
