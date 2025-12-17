@@ -24,7 +24,8 @@ public class Tra : MonoBehaviour
     [Space]
     [SerializeField] private float fallDelay = .5f;
 
-
+    // store initial position so we can reset on player respawn
+    private Vector3 initialPosition;
 
 
     private void Awake()
@@ -32,6 +33,9 @@ public class Tra : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         colliders = GetComponents<BoxCollider2D>();
+
+        // remember start position
+        initialPosition = transform.position;
     }
     private IEnumerator Start()
     {
@@ -43,7 +47,7 @@ public class Tra : MonoBehaviour
 
 
     private void ActivatePlatform() => canMove = true;
-    
+
 
     private void SetupWayPoints()
     {
@@ -68,20 +72,20 @@ public class Tra : MonoBehaviour
     private void HandleMovement()
     {
 
-        if(canMove == false)
+        if (canMove == false)
         {
             return;
         }
 
         transform.position = Vector2.MoveTowards(transform.position, wayPoints[wayPointIndex], speed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, wayPoints[wayPointIndex])< 0.1f)
+        if (Vector2.Distance(transform.position, wayPoints[wayPointIndex]) < 0.1f)
         {
-            wayPointIndex++;    
+            wayPointIndex++;
 
             if (wayPointIndex >= wayPoints.Length)
                 wayPointIndex = 0;
-            
+
         }
     }
 
@@ -93,7 +97,7 @@ public class Tra : MonoBehaviour
 
         impactTimer -= Time.deltaTime;
 
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3.down * 10), impactSpeed*Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3.down * 10), impactSpeed * Time.deltaTime);
     }
 
 
@@ -122,9 +126,40 @@ public class Tra : MonoBehaviour
         rb.gravityScale = 3.5f;
         rb.linearDamping = .5f;
 
-        foreach(BoxCollider2D collider in colliders)
+        foreach (BoxCollider2D collider in colliders)
         {
             collider.enabled = false;
         }
+    }
+
+    // Public method to reactivate the platform (called when player respawns)
+    public void ReactivatePlatform(bool resetPosition = true)
+    {
+      
+
+        impactHappened = false;
+        impactTimer = -1f;
+
+        canMove = true;
+
+        
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0f;
+        rb.linearDamping = 0f;
+
+        foreach (BoxCollider2D collider in colliders)
+        {
+            collider.enabled = true;
+        }
+
+        
+        if (resetPosition)
+            transform.position = initialPosition;
+
+        
+        SetupWayPoints();
+        wayPointIndex = 0;
     }
 }

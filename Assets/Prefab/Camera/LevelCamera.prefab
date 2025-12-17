@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 346646473018961569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.0499992, y: 2.29, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,6 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 391208619018350638}
+  - component: {fileID: 4436886640644154066}
   m_Layer: 0
   m_Name: LevelCamera
   m_TagString: Untagged
@@ -175,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5583057416484265380}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.84, y: -8.55, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -184,6 +185,18 @@ Transform:
   - {fileID: 834418739614341742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4436886640644154066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583057416484265380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831e604eaca703d42a161e1ee79f3688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelCamera
 --- !u!1 &8218202744235608566
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 834418739614341742}
   - component: {fileID: 3270515596295494328}
+  - component: {fileID: 4768720862876963819}
   m_Layer: 0
   m_Name: CinemachineLimits
   m_TagString: Untagged
@@ -262,3 +276,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 36.20019, y: 20.755714}
   m_EdgeRadius: 0
+--- !u!114 &4768720862876963819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218202744235608566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626dc8c749e3aa042b750c11957346a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelCameraTrigger

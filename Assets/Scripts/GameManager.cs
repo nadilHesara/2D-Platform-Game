@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private UI_InGame inGameUi;
-    
+
     [Header("Level Management")]
-    [SerializeField] private float levelTimer; 
+    [SerializeField] private float levelTimer;
     [SerializeField] private int currentLevelIndex;
     private int nextLevelIndex;
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        if(instance == null) 
+        if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         inGameUi = UI_InGame.instance;
-        
+
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         nextLevelIndex = currentLevelIndex + 1;
         CollectFruitsInfo();
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level" + currentLevelIndex + "TotalFruits", totalFruits);
     }
 
-    public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint; 
+    public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
 
     public void RespawnPlayer()
     {
@@ -86,10 +86,26 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
         GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
         player = newPlayer.GetComponent<Player>();
- 
+
+        // Reactivate any falling platforms that were switched off by the player
+        ReactivateAllFallingPlatforms();
     }
 
-    public void AddFruit() 
+    
+    private void ReactivateAllFallingPlatforms()
+    {
+        // Replace this line in ReactivateAllFallingPlatforms():
+      
+        Tra[] platforms = FindObjectsByType<Tra>(FindObjectsSortMode.None);
+        foreach (var p in platforms)
+        {
+          
+            if (p != null)
+                p.ReactivatePlatform();
+        }
+    }
+
+    public void AddFruit()
     {
         fruitsCollected++;
         inGameUi.UpdateFruitUI(fruitsCollected, totalFruits);
@@ -106,7 +122,7 @@ public class GameManager : MonoBehaviour
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
 
-    public void CreateObject(GameObject prefab, Transform target, float delay=0)
+    public void CreateObject(GameObject prefab, Transform target, float delay = 0)
     {
         StartCoroutine(CreateObjectCoroutine(prefab, target, delay));
     }
@@ -126,11 +142,11 @@ public class GameManager : MonoBehaviour
 
     private void SaveFruitsInfo()
     {
-        
+
 
         int fruitsCollectedBefore = PlayerPrefs.GetInt("Level" + currentLevelIndex + "FruitsCollected");
 
-        if(fruitsCollectedBefore < fruitsCollected)
+        if (fruitsCollectedBefore < fruitsCollected)
             PlayerPrefs.SetInt("Level" + currentLevelIndex + "FruitsCollected", fruitsCollected);
 
         int totalFruitsInBank = PlayerPrefs.GetInt("TotalFruitsAmount");
@@ -156,15 +172,15 @@ public class GameManager : MonoBehaviour
     {
         UI_InGame.instance.fadeEffect.ScreenFade(1, .75f, LoadCurrentScene);
     }
-    
-    private void LoadCurrentScene() => SceneManager.LoadScene("Level_"+currentLevelIndex);
+
+    private void LoadCurrentScene() => SceneManager.LoadScene("Level_" + currentLevelIndex);
     private void LoadTheEndScene() => SceneManager.LoadScene("TheEnd");
 
     private void LoadNextLevel()
     {
 
         SceneManager.LoadScene("Level_" + nextLevelIndex);
-    } 
+    }
 
     private void LoadNextScene()
     {
