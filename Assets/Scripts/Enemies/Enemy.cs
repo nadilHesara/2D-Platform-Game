@@ -60,8 +60,24 @@ public class Enemy : MonoBehaviour
 
     private void UpdatePlayerRef()
     {
-        if (player == null)
-            player = GameManager.instance.player.transform;
+        // Guard against missing GameManager singleton
+        if (GameManager.instance == null)
+        {
+            player = null;
+            return;
+        }
+
+        
+        Player gmPlayer = GameManager.instance.player;
+        if (gmPlayer == null)
+        {
+            player = null;
+            return;
+        }
+
+        // Safe to read transform because gmPlayer is not null
+        if (player == null || player != gmPlayer.transform)
+            player = gmPlayer.transform;
     }
     protected virtual void Update()
     {
