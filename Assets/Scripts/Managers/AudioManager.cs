@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
+        if(bgm.Length <= 0)
+            return;
+
         InvokeRepeating(nameof(PlayMusicIfNeeded), 0, 2);
     }
 
@@ -36,6 +39,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM(int bgmToPlay)
     {
+        if(bgm.Length <= 0)
+        {
+            Debug.Log("You have no music on audio manager!");
+            return;
+        }
+
         for (int i = 0; i < bgm.Length; i++)
         {
             bgm[i].Stop();
