@@ -167,7 +167,11 @@ public class GameManager : MonoBehaviour
         if (NoMoreLevels() == false)
         {
             PlayerPrefs.SetInt("ContinueLevelNumber", nextLevelIndex);
-            PlayerPrefs.SetInt("LastUsedSkin", SkinManager.instance.GetSkinId());
+
+            SkinManager skinManager = SkinManager.instance;
+
+            if (skinManager != null)
+                PlayerPrefs.SetInt("LastUsedSkin", skinManager.GetSkinId());
         }
     }
 
