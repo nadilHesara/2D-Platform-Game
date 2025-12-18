@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Source")]
     [SerializeField] private AudioSource[] sfx;
+    [SerializeField] private AudioSource[] bgm;
+
+    private int bgmIndex;
 
     private void Awake()
     {
@@ -14,7 +17,33 @@ public class AudioManager : MonoBehaviour
         if(instance == null)
             instance = this;
         else
-            Destroy(this.gameObject);   
+            Destroy(this.gameObject);
+
+        InvokeRepeating(nameof(PlayMusicIfNeeded), 0, 2);
+    }
+
+    public void PlayMusicIfNeeded()
+    {
+        if (bgm[bgmIndex].isPlaying == false)
+            PlayRandomBGM();
+    }
+
+    public void PlayRandomBGM()
+    {
+        bgmIndex = Random.Range(0, bgm.Length);
+        PlayBGM(bgmIndex);
+    }
+
+    public void PlayBGM(int bgmToPlay)
+    {
+        for (int i = 0; i < bgm.Length; i++)
+        {
+            bgm[i].Stop();
+        }
+
+        bgmIndex = bgmToPlay;
+
+        bgm[bgmToPlay].Play();
     }
 
 
