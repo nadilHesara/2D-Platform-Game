@@ -83,7 +83,7 @@ public class UI_SkinSelection : MonoBehaviour
     {
         bankText.text = "Bank: "+FruitsInBank();
 
-        for (int i = 0; i <= skinDisplay.layerCount; i++)
+        for (int i = 0; i < skinDisplay.layerCount; i++)
         {
             skinDisplay.SetLayerWeight(i, 0);
         }
