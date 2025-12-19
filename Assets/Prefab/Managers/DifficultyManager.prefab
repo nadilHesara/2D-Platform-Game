@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c71fb71a1dbe940a93b1ea8de63002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DificultyManager
-  difficulty: 1
+  difficulty: 2

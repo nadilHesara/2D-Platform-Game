@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject fruitDrop;
     [SerializeField] private DifficultyType gameDifficulty;
     private GameManager gameManager;
 
@@ -131,8 +132,11 @@ public class Player : MonoBehaviour
                 Die();
                 gameManager.RestartLevel();
             }
-            else
+            else 
+            {
+                ObjectCreator.instance.CreateObject(fruitDrop, transform, true);
                 gameManager.RemoveFruit();
+            }
 
             return;
         }
