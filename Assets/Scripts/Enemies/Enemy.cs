@@ -49,35 +49,21 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        InvokeRepeating(nameof(UpdatePlayerRef), 0, 1);  
 
         if(sr.flipX==true && !facingRight)
         {
             sr.flipX = false;
             Flip();
         }
+
+        PlayerManager.OnPlayerRespawn += UpdatePlayerReference;
     }
 
-    private void UpdatePlayerRef()
+    private void UpdatePlayerReference()
     {
-        // Guard against missing GameManager singleton
-        if (GameManager.instance == null)
-        {
-            player = null;
-            return;
-        }
+        if(player == null)
+            player = PlayerManager.instance.player.transform; 
 
-        
-        Player gmPlayer = PlayerManager.instance.player;
-        if (gmPlayer == null)
-        {
-            player = null;
-            return;
-        }
-
-        // Safe to read transform because gmPlayer is not null
-        if (player == null || player != gmPlayer.transform)
-            player = gmPlayer.transform;
     }
     protected virtual void Update()
     {
@@ -105,6 +91,7 @@ public class Enemy : MonoBehaviour
         if(Random.Range(0,100) < 50)
             deathRotationDirection = deathRotationDirection* -1;
 
+        PlayerManager.OnPlayerRespawn -= UpdatePlayerReference;
         Destroy(gameObject, 10);
 
     }
