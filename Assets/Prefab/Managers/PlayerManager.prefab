@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7838000044394512688
+--- !u!1 &7838381984185549958
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8916246959030454624}
-  - component: {fileID: 3453538010665243209}
+  - component: {fileID: 4008478689377397516}
+  - component: {fileID: 157704303726752846}
   m_Layer: 0
-  m_Name: ___GameManager___
+  m_Name: PlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8916246959030454624
+--- !u!4 &4008478689377397516
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838000044394512688}
+  m_GameObject: {fileID: 7838381984185549958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 510.5791, y: 717.1985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3453538010665243209
+--- !u!114 &157704303726752846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838000044394512688}
+  m_GameObject: {fileID: 7838381984185549958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffbb392bfbb478741be929b08e27de8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 915ecd93810a1f442ac85c60066cc209, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  levelTimer: 0
-  currentLevelIndex: 0
+  m_EditorClassIdentifier: '::'
   playerPrefab: {fileID: 1769657487504565674, guid: edc6e1b2a7cf5754fab8ab77694f724b, type: 3}
   respawnPoint: {fileID: 0}
-  respawnDelay: 1.5
+  respawnDelay: 0
   player: {fileID: 0}
-  fruitsAreRandom: 0
-  fruitsCollected: 0
-  totalFruits: 0
-  canReactivate: 0
-  arrowPrefab: {fileID: 3518464661119179452, guid: d3268394cb497424b9652f977c98c886, type: 3}
-  audioManager: {fileID: 4817707371567135299, guid: a0e8f7b3e3de2e14a8fc6c29fe6986c3, type: 3}

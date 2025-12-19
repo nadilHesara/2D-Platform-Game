@@ -41,9 +41,9 @@ public class TrapArrow : Trap_Trampoline
 
     private void DestroyMe()
     { 
-        GameObject arrowPrefab = GameManager.instance.arrowPrefab;
+        GameObject arrowPrefab = ObjectCreator.instance.arrowPrefab;
 
-        GameManager.instance.CreateObject(arrowPrefab, transform, cooldown);
+        ObjectCreator.instance.CreateObject(arrowPrefab, transform, cooldown);
 
         Destroy(gameObject);
     } 

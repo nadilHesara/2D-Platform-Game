@@ -15,26 +15,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int currentLevelIndex;
     private int nextLevelIndex;
 
-    [Header("Player")]
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private Transform respawnPoint;
-    [SerializeField] private float respawnDelay;
-    public Player player;
+   
 
     [Header("Fruit Management")]
     public bool fruitsAreRandom;
     public int fruitsCollected;
     public int totalFruits;
+    public Transform fruitParent;
+
 
 
     [Header("Checkpoints")]
     public bool canReactivate;
 
-    [Header("Traps")]
-    public GameObject arrowPrefab;
+
 
     [Header("Managers")]
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private SkinManager skinManager;
+    [SerializeField] private DifficultyManager difficultyManager;
+    [SerializeField] private ObjectCreator objectCreator;
 
 
 
@@ -52,13 +53,7 @@ public class GameManager : MonoBehaviour
 
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if(respawnPoint == null)
-        {
-            respawnPoint = FindFirstObjectByType<Startpoint>().transform;
-        }
-
-        if (player == null)
-            player = FindAnyObjectByType<Player>();
+    
 
         nextLevelIndex = currentLevelIndex + 1;
 
@@ -77,6 +72,18 @@ public class GameManager : MonoBehaviour
     {
         if (AudioManager.instance == null)
             Instantiate(audioManager);
+
+        if (PlayerManager.instance == null)
+            Instantiate(playerManager);
+
+        if (SkinManager.instance == null)
+            Instantiate(skinManager);
+
+        if (DifficultyManager.instance == null)
+            Instantiate(difficultyManager);
+
+        if (ObjectCreator.instance == null)
+            Instantiate(objectCreator);
     }
     private void CollectFruitsInfo()
     {
@@ -88,41 +95,21 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level" + currentLevelIndex + "TotalFruits", totalFruits);
     }
 
-    public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
 
-    public void RespawnPlayer()
+    [ContextMenu("Parent All The Fruits")]
+    private void ParentAllTheFruits()
     {
-        DifficultyManager difficultyManager = DifficultyManager.instance;
-
-        if (difficultyManager != null && difficultyManager.difficulty == DifficultyType.Hard)
+        if (fruitParent == null)
             return;
 
-        StartCoroutine(RespawnCoroutine());
-    }
+        Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
 
-
-    private IEnumerator RespawnCoroutine()
-    {
-        yield return new WaitForSeconds(respawnDelay);
-        GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
-        player = newPlayer.GetComponent<Player>();
-
-        // Reactivate any falling platforms that were switched off by the player
-        ReactivateAllFallingPlatforms();
-    }
-
-    
-    private void ReactivateAllFallingPlatforms()
-    {
-        // Replace this line in ReactivateAllFallingPlatforms():
-      
-        Tra[] platforms = FindObjectsByType<Tra>(FindObjectsSortMode.None);
-        foreach (var p in platforms)
+        foreach (Fruit fruit in allFruits)
         {
-          
-            if (p != null)
-                p.ReactivatePlatform();
+            fruit.transform.parent = fruitParent;
         }
+
+
     }
 
     public void AddFruit()
@@ -142,16 +129,7 @@ public class GameManager : MonoBehaviour
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
 
-    public void CreateObject(GameObject prefab, Transform target, float delay = 0)
-    {
-        StartCoroutine(CreateObjectCoroutine(prefab, target, delay));
-    }
-    private IEnumerator CreateObjectCoroutine(GameObject prefab, Transform target, float delay)
-    {
-        Vector3 newPosition = target.position;
-        yield return new WaitForSeconds(delay);
-        GameObject newObject = Instantiate(prefab, newPosition, Quaternion.identity);
-    }
+
     public void LevelFinished()
     {
         SaveLevelProgression();

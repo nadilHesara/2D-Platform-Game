@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         }
 
         
-        Player gmPlayer = GameManager.instance.player;
+        Player gmPlayer = PlayerManager.instance.player;
         if (gmPlayer == null)
         {
             player = null;
