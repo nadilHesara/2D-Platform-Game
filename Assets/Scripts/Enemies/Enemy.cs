@@ -79,7 +79,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        foreach(var collider in colliders)
+        // Use bodyType instead of obsolete isKinematic
+        if (rb.bodyType == RigidbodyType2D.Kinematic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
+
+        foreach (var collider in colliders)
         {
             collider.enabled = false;
         }
