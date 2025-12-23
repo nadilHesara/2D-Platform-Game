@@ -28,6 +28,12 @@ public class Tra : MonoBehaviour
     private Vector3 initialPosition;
 
 
+    [Header("Respawn")]
+    [SerializeField] private float respawnDelay = 5f;
+
+    private Coroutine respawnCoroutine;
+
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -113,6 +119,9 @@ public class Tra : MonoBehaviour
             Invoke(nameof(SwitchedOffPlatform), fallDelay);
             impactTimer = impactDuration;
             impactHappened = true;
+
+            if (respawnCoroutine == null)
+                respawnCoroutine = StartCoroutine(RespawnAfterFall());
         }
     }
 
@@ -131,6 +140,19 @@ public class Tra : MonoBehaviour
             collider.enabled = false;
         }
     }
+
+    private IEnumerator RespawnAfterFall()
+    {
+        yield return new WaitForSeconds(fallDelay);
+
+        
+        yield return new WaitForSeconds(respawnDelay);
+
+        ReactivatePlatform(true);
+        respawnCoroutine = null;
+
+    }
+
 
     // Public method to reactivate the platform (called when player respawns)
     public void ReactivatePlatform(bool resetPosition = true)
