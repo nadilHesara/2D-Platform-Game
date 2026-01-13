@@ -257,13 +257,13 @@ public class Player : MonoBehaviour
 
     private IEnumerator PushCoroutine(Vector2 direction, float duration)
     {
-        canBeControlled = false;
-        rb.linearVelocity = Vector2.zero;
+        //canBeControlled = false;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         rb.AddForce(direction, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(duration);
 
-        canBeControlled = true;
+        //canBeControlled = true;
 
     }
 
