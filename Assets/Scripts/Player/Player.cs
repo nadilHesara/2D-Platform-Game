@@ -254,8 +254,27 @@ public class Player : MonoBehaviour
         StartCoroutine(PushCoroutine(direction, duration)); 
     }
 
+    public void PushTrampoline(Vector2 direction, float duration = 0)
+    {
+        StartCoroutine(PushCoroutineTrampoline(direction, duration));
+    }
+
+
 
     private IEnumerator PushCoroutine(Vector2 direction, float duration)
+    {
+        canBeControlled = false;
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(direction, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(duration);
+
+        canBeControlled = true;
+
+    }
+
+
+    private IEnumerator PushCoroutineTrampoline(Vector2 direction, float duration)
     {
         //canBeControlled = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);

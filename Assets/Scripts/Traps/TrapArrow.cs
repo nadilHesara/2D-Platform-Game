@@ -46,6 +46,19 @@ public class TrapArrow : Trap_Trampoline
         ObjectCreator.instance.CreateObject(arrowPrefab, transform,false, cooldown);
 
         Destroy(gameObject);
-    } 
+    }
+
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.Push(transform.up * pushPower, duration);
+            anim.SetTrigger("activate");
+        }
+
+    }
 
 }
