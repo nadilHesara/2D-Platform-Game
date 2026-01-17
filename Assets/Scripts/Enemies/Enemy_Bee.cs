@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.InferenceEngine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -67,6 +67,8 @@ public class Fruit : MonoBehaviour
             GameObject newFx = Instantiate(pickupVfx, transform.position, Quaternion.identity);
 
            
+
+
         }
     }
 }
