@@ -41,12 +41,18 @@ public class PlayerManager : MonoBehaviour
             return;
 
         StartCoroutine(RespawnCoroutine());
+
+
     }
 
 
     private IEnumerator RespawnCoroutine()
     {
         yield return new WaitForSeconds(respawnDelay);
+
+        //note below
+        RespawnEvents.OnRespawn?.Invoke();
+
         GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
         player = newPlayer.GetComponent<Player>();
 

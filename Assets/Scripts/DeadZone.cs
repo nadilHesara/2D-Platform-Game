@@ -4,21 +4,42 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D collision)
+
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+
+    //    Player player = collision.gameObject.GetComponent<Player>();
+
+
+
+    //    if (player != null)
+    //    {
+    //        player.Damage();
+    //        player.Die();
+    //        PlayerManager.instance.RespawnPlayer();
+    //    }
+
+    //    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+
+    //    if (enemy != null)
+    //    {
+    //        enemy.Die();
+    //    }
+    //}
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player = collision.gameObject.GetComponent<Player>();
+        Player player = collision.GetComponent<Player>();
         if (player != null)
         {
-            player.Damage();
             player.Die();
             PlayerManager.instance.RespawnPlayer();
+            return;
         }
 
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-
+        Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy != null)
-        {
             enemy.Die();
-        }
     }
 }
