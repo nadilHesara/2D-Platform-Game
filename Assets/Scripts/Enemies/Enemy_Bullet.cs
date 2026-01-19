@@ -24,7 +24,18 @@ public class Enemy_Bullet : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer(playerLayerName))
         {
-            collision.GetComponent<Player>().KnockBack(transform.position.x);
+            //collision.GetComponent<Player>().KnockBack(transform.position.x);
+
+
+            Player p = collision.GetComponent<Player>();
+
+            if (p != null)
+            {
+                p.Damage();                       // reduces fruit + drops fruit
+                p.KnockBack(transform.position.x); // knockback + shake
+            }
+
+
             Destroy(gameObject);
         }
 

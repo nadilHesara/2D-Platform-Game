@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
+
 
 public class Enemy : MonoBehaviour
 {
+    public static event Action<Enemy> OnAnyEnemyDied;
     protected SpriteRenderer sr=> GetComponent<SpriteRenderer>();
     protected Transform player;
     protected Animator anim;
@@ -55,7 +57,7 @@ public class Enemy : MonoBehaviour
             sr.flipX = false;
             Flip();
         }
-
+       
         PlayerManager.OnPlayerRespawn += UpdatePlayerReference;
     }
 
@@ -79,6 +81,12 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        if (isDead) return;          
+        isDead = true;
+
+        OnAnyEnemyDied?.Invoke(this);
+
+
         // Use bodyType instead of obsolete isKinematic
         if (rb.bodyType == RigidbodyType2D.Kinematic)
             rb.bodyType = RigidbodyType2D.Dynamic;
@@ -89,7 +97,7 @@ public class Enemy : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, deathImpactSpeed);
         isDead = true;
 
-        if (Random.Range(0, 100) < 50)
+        if (UnityEngine.Random.Range(0, 100) < 50)
             deathRotationDirection = deathRotationDirection * -1;
 
         PlayerManager.OnPlayerRespawn -= UpdatePlayerReference;
@@ -103,6 +111,18 @@ public class Enemy : MonoBehaviour
         {
             collider.enabled = enable;
         }
+    }
+
+    protected bool TryGetPlayer()
+    {
+        // handles both null and "destroyed but still referenced"
+        if (!player)
+        {
+            if (PlayerManager.instance != null && PlayerManager.instance.player != null)
+                player = PlayerManager.instance.player.transform;
+        }
+
+        return player;
     }
 
     private void HandleDeathRotation()

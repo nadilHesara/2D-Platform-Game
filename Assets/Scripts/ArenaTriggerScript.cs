@@ -3,40 +3,41 @@ using UnityEngine;
 
 public class ArenaDoorCloser2D : MonoBehaviour
 {
-    [Header("Door Parents (drag LeftDoor and RightDoor here)")]
+    [Header("Door Parents")]
     [SerializeField] private Transform leftDoor;
     [SerializeField] private Transform rightDoor;
 
-    [Header("Closed Targets (drag the target empty objects here)")]
+    [Header("Targets")]
     [SerializeField] private Transform leftClosedTarget;
     [SerializeField] private Transform rightClosedTarget;
 
+    [SerializeField] private Transform leftOpenTarget;
+    [SerializeField] private Transform rightOpenTarget;
+
     [Header("Motion")]
-    [SerializeField] private float closeSpeed = 6f;
+    [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float snapDistance = 0.02f;
 
-    private bool triggered;
+    private Coroutine moveRoutine;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CloseDoors()
     {
-        if (triggered) return;
-
-        if (collision.CompareTag("Player"))
-        {
-            triggered = true;
-            StartCoroutine(CloseDoors());
-
-            // stops triggering again
-            GetComponent<Collider2D>().enabled = false;
-        }
+        if (moveRoutine != null) StopCoroutine(moveRoutine);
+        moveRoutine = StartCoroutine(MoveDoors(leftClosedTarget.position, rightClosedTarget.position));
     }
 
-    private IEnumerator CloseDoors()
+    public void OpenDoors()
+    {
+        if (moveRoutine != null) StopCoroutine(moveRoutine);
+        moveRoutine = StartCoroutine(MoveDoors(leftOpenTarget.position, rightOpenTarget.position));
+    }
+
+    private IEnumerator MoveDoors(Vector3 leftTarget, Vector3 rightTarget)
     {
         while (true)
         {
-            bool leftDone = MoveDoor(leftDoor, leftClosedTarget.position);
-            bool rightDone = MoveDoor(rightDoor, rightClosedTarget.position);
+            bool leftDone = MoveDoor(leftDoor, leftTarget);
+            bool rightDone = MoveDoor(rightDoor, rightTarget);
 
             if (leftDone && rightDone)
                 break;
@@ -49,12 +50,7 @@ public class ArenaDoorCloser2D : MonoBehaviour
     {
         if (door == null) return true;
 
-        door.position = Vector3.MoveTowards(
-            door.position,
-            targetPos,
-            closeSpeed * Time.deltaTime
-        );
-
+        door.position = Vector3.MoveTowards(door.position, targetPos, moveSpeed * Time.deltaTime);
         return Vector3.Distance(door.position, targetPos) <= snapDistance;
     }
 }
