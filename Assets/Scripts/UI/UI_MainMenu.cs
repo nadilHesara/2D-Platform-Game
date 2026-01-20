@@ -19,6 +19,8 @@ public class UI_MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
+
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
     }
 
