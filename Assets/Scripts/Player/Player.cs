@@ -319,11 +319,11 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        //xInput = Input.GetAxisRaw("Horizontal");
+        //yInput = Input.GetAxisRaw("Vertical");
 
-       // xInput = joystick.Horizontal;
-        //yInput = joystick.Vertical;
+        xInput = joystick.Horizontal;
+        yInput = joystick.Vertical;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
