@@ -22119,11 +22119,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3427324495969019124, guid: 89d992fa644bb064299a100ada811739, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000019073486
+      value: 0.32230854
       objectReference: {fileID: 0}
     - target: {fileID: 3427324495969019124, guid: 89d992fa644bb064299a100ada811739, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.37786055
       objectReference: {fileID: 0}
     - target: {fileID: 5449712117248279582, guid: 89d992fa644bb064299a100ada811739, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22164,6 +22164,18 @@ PrefabInstance:
     - target: {fileID: 5449712117248279582, guid: 89d992fa644bb064299a100ada811739, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339767964549744102, guid: 89d992fa644bb064299a100ada811739, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.18823531
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339767964549744102, guid: 89d992fa644bb064299a100ada811739, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.121568635
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339767964549744102, guid: 89d992fa644bb064299a100ada811739, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.12941177
       objectReference: {fileID: 0}
     - target: {fileID: 6568561678776790348, guid: 89d992fa644bb064299a100ada811739, type: 3}
       propertyPath: m_Name
