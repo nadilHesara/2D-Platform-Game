@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
 
     private int facingDir = 1;
 
+    private bool isDead;
+
 
     [Header("Player Visuals")]
     [SerializeField] private AnimatorOverrideController[] animators;
@@ -242,6 +244,23 @@ public class Player : MonoBehaviour
 
     public void Die() 
     {
+        if (isDead) return;
+        isDead = true;
+
+        canBeControlled = false;
+
+        // Optional: freeze physics instantly
+        rb.linearVelocity = Vector2.zero;
+        rb.simulated = false;
+        cd.enabled = false;
+
+        // VERY IMPORTANT: UI must not call methods on a destroyed player
+        UI_JumpButton jumpBtn = FindFirstObjectByType<UI_JumpButton>();
+        if (jumpBtn != null)
+            jumpBtn.UpdatePlayerRef(null);
+
+
+
         AudioManager.instance.PlaySFX(0);
         Destroy(gameObject);
         GameObject newDeathVfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
@@ -334,6 +353,8 @@ public class Player : MonoBehaviour
 
     public void JumpButton()
     {
+        if (isDead || canBeControlled == false) return;
+
         JumpAttempt();
         RequestBufferJump();
     }

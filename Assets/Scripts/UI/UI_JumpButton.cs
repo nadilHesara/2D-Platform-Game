@@ -7,6 +7,7 @@ public class UI_JumpButton : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (player == null || !player.isActiveAndEnabled) return;
         player.JumpButton();
     }
 
