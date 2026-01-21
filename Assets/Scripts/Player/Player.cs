@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     private bool isAirborne;
     private bool isWallDetected;
 
-    private Joystick joystick;
+    //private Joystick joystick;
     private float xInput;
     private float yInput;
 
@@ -78,8 +78,8 @@ public class Player : MonoBehaviour
         cd = GetComponent<CapsuleCollider2D>();
         anim = GetComponentInChildren<Animator>();
 
-        FindFirstObjectByType<UI_JumpButton>().UpdatePlayerRef(this);
-        joystick = FindFirstObjectByType<Joystick>();
+        //FindFirstObjectByType<UI_JumpButton>().UpdatePlayerRef(this);
+        //joystick = FindFirstObjectByType<Joystick>();
 
     }
 
@@ -337,11 +337,11 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
-        //xInput = Input.GetAxisRaw("Horizontal");
-        //yInput = Input.GetAxisRaw("Vertical");
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
 
-        xInput = joystick.Horizontal;
-        yInput = joystick.Vertical;
+        //xInput = joystick.Horizontal;
+        //yInput = joystick.Vertical;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

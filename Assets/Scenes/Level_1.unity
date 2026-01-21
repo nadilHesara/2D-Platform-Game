@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Double Tap: Double Jump'
+  m_text: 'Right/Left Arrow Keys: Move'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e98cd8fb12fd574583a30f0e11ba7fd, type: 2}
   m_sharedMaterial: {fileID: 5564269734631598529, guid: 0e98cd8fb12fd574583a30f0e11ba7fd, type: 2}
@@ -1734,7 +1734,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -105.45752, y: 0, z: -145.72314, w: 0}
+  m_margin: {x: -192.94727, y: 0, z: -145.72314, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2228,7 +2228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Right side of the screen:
+  m_text: 'Controls:
 
 '
   m_isRightToLeft: 0
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -101.62256, y: 0, z: -145.72314, w: 0}
+  m_margin: {x: -191.68591, y: 0, z: -145.72314, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6956,7 +6956,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tap: Jump'
+  m_text: 'Spacebar: Jump/Double Jump'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e98cd8fb12fd574583a30f0e11ba7fd, type: 2}
   m_sharedMaterial: {fileID: 5564269734631598529, guid: 0e98cd8fb12fd574583a30f0e11ba7fd, type: 2}
@@ -7022,7 +7022,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -109.29224, y: 0, z: -145.72314, w: 0}
+  m_margin: {x: -196.78223, y: 0, z: -145.72314, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
